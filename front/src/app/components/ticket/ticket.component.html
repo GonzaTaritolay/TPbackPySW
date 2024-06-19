@@ -1,0 +1,73 @@
+<button class="btn btn-primary mx-3 my-1" (click)="MostrarForm()">Recuperar por espectador</button>
+<button class="btn btn-primary mx-3 my-1" (click)="agregarTicket()">Nuevo Ticket</button>
+@if(mostrar){
+  <button class="btn btn-primary mx-3 my-1" (click)="MostrarTicket()">Recuperar todos</button>
+  <form class="contenedor mx-auto mt-5 w-50">
+      <div class="mb-3">
+        <label class="form-label">Espectador</label>
+        <select name="ticket" [(ngModel)]="tipo" (change)="TipoTicket()"   class="form-select">
+          <option value="l">Local</option>
+          <option value="e">Extranjero</option>
+        </select>
+      </div>
+  </form>
+
+}
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col"></th>
+        <th scope="col">Precio</th>
+        <th scope="col">Categoria</th>
+        <th scope="col">Fecha</th>
+        <th scope="col">Email</th>
+        <th scope="col">Tipo</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let ticket of ticket">
+        <th scope="row"></th>
+        <td>{{ticket.precioTicket}}</td>
+        <td>{{ticket.categoriaEspectador}}</td>
+        <td>{{ticket.fechaCompra}}</td>
+        <td>{{ticket.espectador.email}}</td>
+        <td>{{ticket.tipo.tipo}}</td>
+        <td >
+          <button class="btn btn-warning mx-3 my-1" (click)="Modificar(ticket._id)">Modificar</button>
+          <button class="btn btn-danger mx-3 my-1" (click)="Eliminar(ticket._id)">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+
+
+<!-- 
+<form >
+    <div class="contenedorForm">
+        <div class="mb-3">
+            <label class="form-label">Ingrese Nombre</label>
+            <input type="text" class="form-control" name="nombre" [(ngModel)]="postEspectador.nombre">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Ingrese Apellido</label>
+            <input type="text" class="form-control" name="apellido" [(ngModel)]="postEspectador.apellido">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Ingrese Dni</label>
+            <input type="text" class="form-control" name="dni" [(ngModel)]="postEspectador.dni">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Ingrese Email</label>
+            <input type="email" class="form-control" name="email" [(ngModel)]="postEspectador.email">
+        </div> 
+        <button type="submit" class="btn" (click)="CrearEspectador()" >Agregar</button>
+        
+    </div>
+    }
+</form>
+  
+-->
+
+

@@ -1,0 +1,35 @@
+<div  id="carouselExampleIndicators" class="carousel slide w-50 carouseel">
+  <div class="carousel-inner">
+    <div  *ngFor="let i of productosDestacados; let first= first" class="carousel-item" [class.active]="first">
+      <img [src]="i.imagen" class="d-block w-100" alt="...">
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-4" *ngFor="let i of TodosProductos">
+      <div class="card custom" style="width: 18rem">
+        <img [src]="i.imagen" class="card-img-top" alt="..." />
+        <div class="card-body">
+          <h4 class="card-title">{{ i.precio }}</h4>
+          <h5 class="card-title">{{ i.nombre }}</h5>
+          <p class="card-text">{{ i.descripcion }}</p>
+          <button  class="btn btn-warning">Comprar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<button (click)="AgregarProducto()" class="btn btn-primary m-3">
+  Añadir Producto
+</button>
+
+  

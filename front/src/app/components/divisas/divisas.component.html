@@ -1,0 +1,141 @@
+<div class="container">
+    <div class="row">
+        <div class="col-xl-6 col-md-6 col-ms-12 col-xs-12 mt-5">
+            <form >
+                <div class="contenedorForm">
+                    <div class="mb-3">
+                        <label class="form-label">Ingrese Email</label>
+                        <input type="email" class="form-control" name="emailCliente" [(ngModel)]="Postdivisas.emailCliente">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Cantidad</label>
+                        <input type="number" class="form-control" placeholder="Cantidad" name="cantidadOrigen" [(ngModel)]="Postdivisas.cantidadOrigen">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">De</label>
+                        <select class="form-select" type="text" name="monedaOrigen" [(ngModel)]="Postdivisas.monedaOrigen" *ngIf="TipoMonedas.length > 0">
+                              <option *ngFor="let i of TipoMonedas" [value]="i">{{i}}</option>
+                        </select>  
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" >A:</label>
+                        <select (change)="PostMonedas(Postdivisas.monedaOrigen,Postdivisas.monedaDestino,Postdivisas.cantidadOrigen)" class="form-select" type="text" name="monedaDestino" [(ngModel)]="Postdivisas.monedaDestino">
+                            <option *ngFor="let i of TipoMonedas" [value]="i">{{i}}</option>
+                        </select>
+                    </div>
+                    <fieldset disabled>
+                        <div class="mb-3">
+                            <label class="form-label">Tasa</label>
+                            <input value="{{Postdivisas.tasaConversion | dosDecimales }}" type="number" class="form-control" name="tasaConversion" [(ngModel)]="Postdivisas.tasaConversion">
+                        </div>
+                    </fieldset> 
+                    <fieldset disabled>
+                        <div class="mb-3">
+                            <label  class="form-label">Total a recibir</label>
+                            <input value="{{Postdivisas.cantidadDestino | currency}}" type="text" class="form-control" placeholder="{{destino}}" >
+                        </div>
+                    </fieldset> 
+                    <button type="submit" class="btn" (click)="Convertir()" >Convertir</button>
+                    
+                </div>
+                <div class="">
+                    <button id="bton" type="submit" class="btn m-5 w-10" (click)="ObtenerDivisas()">Recuperar todos</button>
+                    <button id="bton" type="submit" class="btn m-5 w-3" (click)="RecuperarFiltro()">Recuperar por filtro</button>
+                </div>  
+            </form>
+        </div>
+    
+
+        <div *ngIf="divisas.length > 0"class="col-xl-6 col-md-6 col-ms-12 col-xs-12 mt-5">
+            <table class="table table-info table-hover w-50 p-5">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Cantidad</th>
+                    <th scope="col">Tasa</th>
+                    <th scope="col">Moneda Origen</th>
+                    <th scope="col">Moneda Destino</th>
+                    <th scope="col">Total</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let divisa of divisas" >
+                    <th scope="row"></th>
+                    <td>{{divisa.emailCliente}}</td>
+                    <td>{{divisa.cantidadOrigen | currency}}</td>
+                    <td>{{divisa.tasaConversion | dosDecimales}}</td>
+                    <td>{{divisa.monedaOrigen}}</td>
+                    <td>{{divisa.monedaDestino}}</td>
+                    <td>{{divisa.cantidadDestino | currency}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xl-6 col-md-6 col-ms-12 col-xs-12 m-5">
+            @if(filtro==true){
+                <div>
+                    <button type="submit" id="bton" class="btn mx-5 my-5" (click)="FiltroCorreoForm()">Filtrar por Correo</button>
+                    <button type="submit" id="bton" class="btn mx-5 my-5" (click)="FiltroMonedaForm()">Filtrar por Moneda</button>
+                </div>  
+
+                @if(correo==true){
+                <form class="mt-5">
+                    <div class="mb-3">
+                        <label class="form-label">Ingrese Email</label>
+                        <input type="email" class="form-control" name="emailCliente" [(ngModel)]="Postdivisas.emailCliente">
+                    </div>
+                    <button data-bs-toggle="modal" data-bs-target="#exampleModal" type="submit" id="bton" class="btn mx-5 my-5" (click)="BuscarCorreo()">Buscar</button>
+                </form>
+                }   
+
+                @if (moneda==true){
+                <form class="mt-5">
+                    <div class="mb-3">
+                        <label class="form-label">De</label>
+                        <select class="form-select" type="text" name="monedaOrigen" [(ngModel)]="Postdivisas.monedaOrigen">
+                            <option>USD</option>
+                            <option>EUR</option>
+                            <option>ARS</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" >A:</label>
+                        <select class="form-select" type="text" name="monedaDestino" [(ngModel)]="Postdivisas.monedaDestino">
+                            <option>USD</option>
+                            <option>EUR</option>
+                            <option>ARS</option>
+                        </select>
+                    </div>
+                    <button data-bs-toggle="modal" data-bs-target="#exampleModal" type="submit" id="bton" class="btn mx-5 my-5" (click)="BuscarMoneda()">Buscar</button>
+                </form>
+                }  
+            }
+        </div>     
+    </div>
+</div>    
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Resultado: </h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div *ngFor="let i of divisaCorreo" class="modal-body">
+          <p>Email: {{i.emailCliente}}</p>
+          <p>Cantidad: {{i.cantidadOrigen}}</p>
+          <p>Tasa: {{i.tasaConversion}}</p>
+          <p>Moneda Origen: {{i.monedaOrigen}}</p>
+          <p>Moneda Destino: {{i.monedaDestino}}</p>
+          <p>Total: {{i.cantidadDestino}}</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>

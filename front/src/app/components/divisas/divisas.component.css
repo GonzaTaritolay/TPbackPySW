@@ -1,0 +1,32 @@
+
+table{
+    margin: auto; 
+    border-radius: 15px;
+}
+td, th{
+    color: rgb(0, 0, 0);
+    padding: 15px;
+}
+.contenedorForm{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+form{
+    background-color: #cfd0f6;
+    padding: 15px;
+    border-radius: 10px;
+   
+}
+input,select{
+    width: 20vw;
+}
+label{
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    padding: 10px;
+    color: rgb(43, 44, 44);
+}
+button{
+    color: #cfd0f6;
+    background:linear-gradient(#8372da,#483a75) ;
+}

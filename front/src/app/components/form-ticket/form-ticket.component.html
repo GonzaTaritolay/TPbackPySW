@@ -1,0 +1,27 @@
+<form >
+    <div class="mb-3" >
+      <label class="form-label" >Precio</label>
+      <input type="number" class="form-control"  value="{{ticket.precioTicket}}" name="precio" [(ngModel)]="ticket.precioTicket">
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Tipo de Espectador</label>
+      <input type="text" class="form-control" value="{{ticket.categoriaEspectador}}" name="categoria" [(ngModel)]="ticket.categoriaEspectador">
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Fecha</label>
+        <input type="text" class="form-control" value="{{ticket.fechaCompra}}" name="fecha" [(ngModel)]="ticket.fechaCompra">
+    </div>
+    <div  class="mb-3">
+      <select class="form-select" aria-label="Default select example" name="espectador" [(ngModel)]="ticket.espectador">
+        <option [ngValue]="e" *ngFor="let e of espectador">{{e.email}}</option>
+      </select>
+    </div>
+    <div  class="mb-3">
+      <select class="form-select" aria-label="Default select example" name="tipo" [(ngModel)]="ticket.tipo">
+        <option [ngValue]="e" *ngFor="let e of tipo">{{e.tipo}}</option>
+      </select>
+    </div>
+    
+    <button type="submit" class="btn btn-primary" (click)="actualizar()">Submit</button>
+</form>
+
